@@ -73,11 +73,13 @@
         <div class="row d-flex justify-content-center align-items-center">
             <div class=" .col col-md-3 my-5">
                 <main class="form-signin">
-                    <form method="POST" action="">
+                    <form method="POST" action="validate">
                         <h1 class="h3 mb-3 fw-normal text-white">Please sign in</h1>
-
+                         
+                   <!-- Successful signup message here --> 
+                     <span class="text-warning"><?php echo isset($data['msg'])?$data['msg']:"" ?> </span>
                         <div class="form-floating">
-                            <input type="email" name="username" class="form-control" id="floatingInput" placeholder="name@example.com">
+                            <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com">
                             <label for="floatingInput">Email address</label>
                         </div>
                         <div class="form-floating">
@@ -90,7 +92,7 @@
                                 <input type="checkbox" value="remember-me"> Remember me
                             </label>
                         </div>
-                        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+                        <input name="action" value="SignIn" class="w-100 btn btn-lg btn-primary" type="submit">
                         <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
                     </form>
                 </main>

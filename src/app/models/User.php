@@ -1,19 +1,6 @@
 <?php
-class User
+
+class User extends \ActiveRecord\Model
 {
-    private $db;
-
-    public function __construct()
-    {
-        $this->db = new Database;
-    }
-
-    public function getUser()
-    {
-        $this->db->query("SELECT * FROM user");
-        
-        $result = $this->db->resultSet();
-
-        return $result;
-    }
+    //empty class
 }

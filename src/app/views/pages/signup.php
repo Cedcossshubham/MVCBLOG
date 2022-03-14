@@ -48,7 +48,7 @@
     <link href="signin.css" rel="stylesheet">
 </head>
 
-<body class="text-center" style="background-image: url(<?php echo URLROOT . 'assets/img/signup-bg.jpg' ?>)">
+ <body class="text-center" style="background-image: url('<?php echo URLROOT . 'assets/img/signup-bg.jpg' ?>')"> 
     <div class="container-fluid" class="masthead" >
         <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
             <div class="container px-4 px-lg-5">
@@ -73,18 +73,22 @@
         <div class="row d-flex justify-content-center align-items-center">
             <div class=" .col col-md-3 my-5">
                 <main class="form-signin">
+
+                   <!-- Successful signup message here --> 
+                     <span class="text-warning"><?php echo $data['msg']??""?> </span>
+                    <!-- login page -->
                     <form method="POST" action="">
                         <h1 class="h3 mb-3 fw-normal text-white">Please SignUp</h1>
                         <div class="form-floating my-1">
-                            <input type="email" name="username" class="form-control" id="floatingInput" placeholder="username">
+                            <input type="text" name="username" class="form-control" id="floatingInput" placeholder="username">
                             <label for="floatingInput">User Name</label>
                         </div>
                         <div class="form-floating my-1">
-                            <input type="email" name="username" class="form-control" id="floatingInput" placeholder="Full Name">
+                            <input type="text" name="fullname" class="form-control" id="floatingInput" placeholder="Full Name">
                             <label for="floatingInput">Full Name</label>
                         </div>
                         <div class="form-floating my-1">
-                            <input type="email" name="username" class="form-control" id="floatingInput" placeholder="name@example.com">
+                            <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com">
                             <label for="floatingInput">Email address</label>
                         </div>
                         <div class="form-floating my-1">
@@ -92,7 +96,7 @@
                             <label for="floatingPassword">Password</label>
                         </div>
                         <div class="form-floating my-1">
-                            <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Confirm Password">
+                            <input type="password" name="confirmpassword" class="form-control" id="floatingPassword" placeholder="Confirm Password">
                             <label for="floatingPassword">Confirm Password</label>
                         </div>
 
@@ -101,7 +105,7 @@
                                 <input type="checkbox" value="remember-me"> Remember me
                             </label>
                         </div>
-                        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign Up</button>
+                        <input type="submit" class="w-100 btn btn-lg btn-primary" name = "action" value="Sign Up">
                         <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
                     </form>
                 </main>
