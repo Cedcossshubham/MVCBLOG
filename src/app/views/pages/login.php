@@ -61,7 +61,6 @@
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4 text-white" href="home">Home</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4 text-white" href="about">About</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4 text-white" href="post">Sample Post</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4 text-white" href="contact">Contact</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4 text-white" href="login">SignIn</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4 text-white" href="signup">SignUp</a></li>

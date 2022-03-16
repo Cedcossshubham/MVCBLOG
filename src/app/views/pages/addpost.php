@@ -31,10 +31,11 @@
                     <div class="collapse navbar-collapse" id="navbarResponsive">
                         <ul class="navbar-nav ms-auto py-4 py-lg-0">
                             <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="home">Home</a></li>
-                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="about">About</a></li>
-                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="#">My Blogs</a></li>
-                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="contact">Contact</a></li>
-                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="#">SignOut</a></li>
+                            <!-- <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="about">About</a></li> -->
+                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="viewblog">My Blogs</a></li>
+                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="profile">My Profile</a></li>
+                            <!-- <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="contact">Contact</a></li> -->
+                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="signout">SignOut</a></li>
                         </ul>
                     </div>
                 </div>
@@ -47,19 +48,19 @@
             <!-- Post Content-->
         <div class="col col-md-12 my-5 d-flex justify-content-center align-items-center">
                
-            <form method="POST" action="" class="col-md-12">
-                <h1 class="h3 mb-3 mx-5 my-3 fw-normal text-white">Create Post</h1>
+            <form method="POST" action="<?php echo isset($_REQUEST['action'])?'updatePost?id='.$_REQUEST['id']??''.'':'createPost'?>" class="col-md-12 text-center">
+                <h1 class="h3 mb-3 mx-5 my-3 fw-normal text-white"><?php echo $_REQUEST['action']??'Create Post'?></h1>
                     
-            <!-- Successful signup message here --> 
-                <span class="text-warning"><?php //echo $data['msg']??$data['msg']->msg?> </span>
+            <!-- Successful post message here --> 
+                <span class="text-success"><?php echo $data['msg']??""?> </span>
                 <div class="form-floating col-md-11 my-2 mx-5 bd-secondary">
-                    <input type="email" name="email" class="form-control" id="floatingInput" placeholder="Title">
+                    <input type="text" name="blogtitle" class="form-control" id="floatingInput" placeholder="Title" value="<?php echo $data['title']??'' ?>">
                     <label for="floatingInput">Blog Title</label>
                 </div>
                 <div class="form-group floatingInput col-md-11 my-2 mx-5 ">
-                    <textarea class="form-control rounded-0 bg-secondary text-white" id="exampleFormControlTextarea1" rows="10" placeholder="Content"></textarea>
+                    <textarea class="form-control rounded-0 bg-secondary text-white" id="exampleFormControlTextarea1" rows="10" placeholder="Content" name="blogcontent"><?php echo $data['content']??''?></textarea>
                 </div>
-                <input name="action" value="POST" class="btn btn-lg btn-primary  mx-5" type="submit">
+                <input value="<?php echo isset($_REQUEST['action'])?'UPDATE':'POST'?>" class="btn btn-lg btn-primary  mx-5" type="submit">
                 <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
             </form>
                

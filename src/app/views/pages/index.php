@@ -1,5 +1,2 @@
-<?php
-
-foreach ($data['users'] as $user) {
-    echo "information :".$user->username;
-}
+ <?php
+ print_r($_SESSION['user']);

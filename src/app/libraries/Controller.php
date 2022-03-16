@@ -1,8 +1,8 @@
 <?php
 //Load the models and the view
+
 class Controller
 {
-    //=============change code==========
     public function model($model)
     {
         require_once '../app/libraries/php-activerecord/ActiveRecord.php';
@@ -11,22 +11,14 @@ class Controller
         {
             $cfg->set_model_directory('../app/models');
             $cfg->set_connections(array(
-                'development' => 'mysql://root:secret@mysql-server/blog'));
+            'development' => 'mysql://root:secret@mysql-server/blog'));
         });
 
         require_once '../app/models/'.$model.'.php';
-
-       // $model = '\\App\\Models\\'. $model;
         return new $model;
     }
 
-    //=======================
-    // public function model($model)
-    // {
-    //     require_once '../app/models/'.$model.'.php';
-    //      //Instantiate model
-    //     return new $model();
-    // }
+
 
     public function view($view, $data = [])
     {

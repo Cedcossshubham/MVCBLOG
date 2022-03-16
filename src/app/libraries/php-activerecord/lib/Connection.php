@@ -385,7 +385,7 @@ abstract class Connection
 	public function quote_name($string)
 	{
 		return $string[0] === static::$QUOTE_CHARACTER || $string[strlen($string)-1] === static::$QUOTE_CHARACTER ?
-			$string : static::$QUOTE_CHARACTER . $string . static::$QUOTE_CHARACTER;
+		$string : static::$QUOTE_CHARACTER . $string . static::$QUOTE_CHARACTER;
 	}
 
 	/**
@@ -453,4 +453,3 @@ abstract class Connection
 	 */
 	abstract function query_for_tables();
 };
-?>
