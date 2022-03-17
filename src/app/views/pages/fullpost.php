@@ -49,7 +49,13 @@
                             <span class="meta">
                                 Posted by
                                 <a href="#!" class="text-decoration-none"><?php echo $data['username']?></a>
-                                on August 24, 2021
+                                <?php 
+                                 $date = json_encode($data['date']);
+                                 $date = json_decode($date);
+             
+                                 $d=explode(' ', $date->date);
+                                 echo $newDate = date("M-d-Y", strtotime($d[0]));
+                                ?>
                             </span>
                         </div>
                     </div>
@@ -61,15 +67,19 @@
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
-                    <div class="post-preview">
-                        <a href="#">
-                            <h2 class="post-title"><?php echo $data['title'] ?></h2>
-                            <h3 class="post-subtitle"><?php echo $data['content']?></h3>
-                        </a>
+                    <div class="post-preview">                        
+                        <h2 class="post-title"><?php echo $data['title'] ?></h2>
+                        <p class="post-subtitle h4 text-secondary"><?php echo $data['content']?></p>                    
                         <p class="post-meta">
-                            Posted by
-                            <a href="#"><?php echo $data['username']?></a>
-                            on August 24, 2021
+                            Posted by                           
+                            <a href="#!" class="text-decoration-none"><?php echo $data['username']?></a>
+                                <?php 
+                                 $date = json_encode($data['date']);
+                                 $date = json_decode($date);
+             
+                                 $d=explode(' ', $date->date);
+                                 echo $newDate = date("M-d-Y", strtotime($d[0]));
+                                ?>
                         </p>
                     </div>
                     </div>

@@ -449,7 +449,8 @@ class Pages extends Controller
         $data=[
             'title' => $blog->blogtitle,
             'content' => $blog->content,
-            'username' => $blog->username
+            'username' => $blog->username,
+            'date' => $blog->date
         ];
         
         $this->view('pages/fullpost', $data);

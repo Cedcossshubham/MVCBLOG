@@ -48,7 +48,7 @@
             <!-- Post Content-->
         <div class="col col-md-12 my-5 d-flex justify-content-center align-items-center">
                
-            <form method="POST" action="<?php echo isset($_REQUEST['action'])?'updatePost?id='.$_REQUEST['id']??''.'':'createPost'?>" class="col-md-12 text-center">
+            <form method="POST" enctype="multipart/form-data" action="<?php echo isset($_REQUEST['action'])?'updatePost?id='.$_REQUEST['id']??''.'':'createPost'?>" class="col-md-12 text-center">
                 <h1 class="h3 mb-3 mx-5 my-3 fw-normal text-white"><?php echo $_REQUEST['action']??'Create Post'?></h1>
                     
             <!-- Successful post message here --> 
@@ -56,6 +56,9 @@
                 <div class="form-floating col-md-11 my-2 mx-5 bd-secondary">
                     <input type="text" name="blogtitle" class="form-control" id="floatingInput" placeholder="Title" value="<?php echo $data['title']??'' ?>">
                     <label for="floatingInput">Blog Title</label>
+                </div>
+                <div class="form-floating col-md-11 my-2 mx-5 bd-secondary>
+                    <input type="file" name='blogimage' id='fileToUpload' class="btn btn-primary"> 
                 </div>
                 <div class="form-group floatingInput col-md-11 my-2 mx-5 ">
                     <textarea class="form-control rounded-0 bg-secondary text-white" id="exampleFormControlTextarea1" rows="10" placeholder="Content" name="blogcontent"><?php echo $data['content']??''?></textarea>

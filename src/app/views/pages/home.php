@@ -23,7 +23,7 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
         <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="index.html">Start Bootstrap</a>
+            <a class="navbar-brand" href="index.html"><?php $_SESSION['user']['fullname']??''?></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
                 <i class="fas fa-bars"></i>
@@ -58,24 +58,35 @@
                 <!-- Post preview-->
                 <?php
                 $html = "";
+                $t=time();
+                $today = date("d-M-y", $t);
                 foreach ($data['blogs'] as $value) {
-                    $html .= ' <div class="post-preview">
-                        <a href="fullpost?id=' . $value->blog_id . '">
-                            <h2 class="post-title">' . $value->blogtitle . '</h2>                            
-                        </a>
-                        <p class="post-meta">
-                            Posted by
-                            <a href="#!">' . $value->username . '</a>
-                            on September 24, 2021
-                        </p>
+                    $date = json_encode($value->date);
+                    $date = json_decode($date);
+
+                    $d=explode(' ', $date->date);
+                    $newDate = date("d-M-Y", strtotime($d[0]));
+
+                    if ($newDate==$today) {
+                        $time = "Today";
+                    } else {
+                        $time = $newDate;
+                    }
+                    $html .='<div class="card p-3 my-3 shadow bg-white rounded">
+                    <a href="fullpost?id='.$value->blog_id.'"><img class="card-img-top" src='. URLROOT . "assets/img/".$value->blogimage."".' alt="Card image cap"></a>
+                    <div class="card-block">
+                        <h4 class="card-title fw-bold mt-2">'. $value->blogtitle .'</h4>
+                        <p class="card-text small text-justify">'.$value->content.'</p>
+                        <p class="fw-bold text-secondary small" >Posted by :<span class="font-italic text-dark">'.$value->username.'</span></p>
+                        <span class="font-italic text-dark small">Posted on: '.$time.'</span>
+                        <hr class="my-2" />
+                        <a href="#" class="btn"><i class="fa fa-heart text-danger" aria-hidden="true"></i></a><span class="font-italic small">102 likes</span>
+                        <a href="#" class="btn"><i class="fa fa-comment" aria-hidden="true"></i></a><span class="font-italic small">20 comments</span>
                     </div>
-                    <!-- Divider-->
-                    <hr class="my-4" />';
+                </div>';
                 }
                 echo $html;
-                ?>
-                <!-- Pager-->
-                <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div>
+                ?>     
             </div>
         </div>
     </div>
