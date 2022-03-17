@@ -81,8 +81,13 @@
                 $role = $_SESSION['user']['role']??"";
             
                 foreach ($data[0] as $value) {
-                    $arr =explode(':', json_encode($value->date));
+                    // $arr = json_encode($value->date);
 
+                    // $arr = json_decode($arr);
+                    // $date = $arr->date;
+                    // $result = $arr->format('Y-m-d H:i:s');
+
+                    // echo $result;
                     if ($role=='user') {
                         $html .= '<div class="card m-1" style="width: 18rem;">
                         <a class="text-decoration-none text-dark" href="fullpost?id='.$value->blog_id.'">
@@ -104,7 +109,7 @@
                             <h5 class="card-title fw-bold">'.$value->blogtitle.'</h5>
                             <p class="card-text font-italic">'.$value->content.'</p>
                             <p class="card-text">Posted BY: '.$value->username.'</p>      
-                            <p class="card-text">Posted On:'.trim($arr[1]).'</p>            
+                            <p class="card-text">Posted On</p>            
                             <a type="submit" href="hideblog?id='.$value->blog_id.'" class="btn btn-primary bg-primary">'.$value->status.'</a>
                             <a type="submit" href="deleteblog?id='.$value->blog_id.'" class="btn btn-primary bg-danger">Delete</a>
                         </div>

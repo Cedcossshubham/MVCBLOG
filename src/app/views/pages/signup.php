@@ -60,8 +60,6 @@
                 <div class="collapse navbar-collapse " id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0  ">
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4 text-white" href="home">Home</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4 text-white" href="about">About</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4 text-white" href="contact">Contact</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4 text-white" href="login">SignIn</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4 text-white" href="signup">SignUp</a></li>
                     </ul>
@@ -79,23 +77,23 @@
                     <form method="POST" action="">
                         <h1 class="h3 mb-3 fw-normal text-white">Please SignUp</h1>
                         <div class="form-floating my-1">
-                            <input type="text" name="username" class="form-control" id="floatingInput" placeholder="username">
+                            <input type="text" name="username" class="form-control" id="floatingInput" placeholder="username" maxlength="50">
                             <label for="floatingInput">User Name</label>
                         </div>
                         <div class="form-floating my-1">
-                            <input type="text" name="fullname" class="form-control" id="floatingInput" placeholder="Full Name">
+                            <input type="text" name="fullname" class="form-control" id="floatingInput" placeholder="Full Name"maxlength="50">
                             <label for="floatingInput">Full Name</label>
                         </div>
                         <div class="form-floating my-1">
-                            <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                            <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com" maxlength="50">
                             <label for="floatingInput">Email address</label>
                         </div>
                         <div class="form-floating my-1">
-                            <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
+                            <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password" maxlength="50">
                             <label for="floatingPassword">Password</label>
                         </div>
                         <div class="form-floating my-1">
-                            <input type="password" name="confirmpassword" class="form-control" id="floatingPassword" placeholder="Confirm Password">
+                            <input type="password" name="confirmpassword" class="form-control" id="floatingPassword" placeholder="Confirm Password" maxlength="50">
                             <label for="floatingPassword">Confirm Password</label>
                         </div>
 

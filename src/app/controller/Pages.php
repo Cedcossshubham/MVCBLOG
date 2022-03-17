@@ -40,8 +40,11 @@ class Pages extends Controller
      */
     public function validate()
     {
+        $email = $_REQUEST['email']??"";
+        $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+
         $user =[
-            'email' => $_REQUEST['email']??"",
+            'email' => $email,
             'password' => $_REQUEST['password']??""
         ];
 
@@ -56,6 +59,10 @@ class Pages extends Controller
         ];
 
         if (isset($result) && $result->status == 'approved') {
+            $data = [
+                'msg'=>""
+            ];
+
             if (isset($_SESSION['user'])) {
                 $_SESSION['user'] = $userdata;
             } else {
@@ -87,20 +94,30 @@ class Pages extends Controller
     public function signup()
     {
         $pass = $_REQUEST['password']??"";
-        $email = $_REQUEST['email']??"";
+        $pass =filter_var($pass, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
 
-        $user =  $this->model('User');
-        $user->username = $_REQUEST['username']??"";
-        $user->fullname = $_REQUEST['fullname']??"";
-        $user->email = $_REQUEST['email']??"";
-        $user->password = $_REQUEST['password']??"";
+        $email = $_REQUEST['email']??"";
+        $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+
+        $username = $_REQUEST['username']??"";
+        $username =filter_var($username, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
+
+        $fullname = $_REQUEST['fullname']??"";
+        $fullname =filter_var($fullname, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
+        
         $confirmpassword = $_REQUEST['confirmpassword']??"";
+        $confirmpassword =filter_var($confirmpassword, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
+               
 
         $result = $this->userModel::find(array(
             'email'=> $email
         ));
-        
-        if ($pass != $confirmpassword) {
+
+        if (empty($pass) || empty($email) || empty($username) || empty($fullname) || empty($pass) || empty($confirmpassword)) {
+            $data = [
+                'msg'=>"All fields are required!"
+            ];
+        } elseif ($pass != $confirmpassword) {
             $data = [
                 'msg'=>"passwords not match!"
             ];
@@ -112,6 +129,13 @@ class Pages extends Controller
             $data = [
                 'msg'=>"Account created Successfully !"
             ];
+
+            $user =  $this->model('User');
+            $user->username = $_REQUEST['username']??"";
+            $user->fullname = $_REQUEST['fullname']??"";
+            $user->email = $_REQUEST['email']??"";
+            $user->password = $_REQUEST['password']??"";
+            $confirmpassword = $_REQUEST['confirmpassword']??"";
             $user->save();
         }
       
@@ -142,6 +166,11 @@ class Pages extends Controller
      */
     public function addpost()
     {
+         
+        if (!isset($_SESSION['user'])) {
+            header('Location:login');
+        }
+
         $this -> view('pages/addpost');
     }
 
@@ -152,9 +181,20 @@ class Pages extends Controller
      */
     public function createPost()
     {
+         
+        if (!isset($_SESSION['user'])) {
+            header('Location:login');
+        }
+        $title = $_REQUEST['blogtitle']??"";
+        $title =filter_var($title, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
+
+        $content = $_REQUEST['blogcontent']??"";
+        $content = filter_var($content, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
+
+
         $blog =  $this->model('Blog');
-        $blog->blogtitle = $_REQUEST['blogtitle']??"";
-        $blog->content = $_REQUEST['blogcontent']??"";
+        $blog->blogtitle = $title;
+        $blog->content = $content;
         $blog->user_id = $_SESSION['user']['user_id']??"";
         $blog->username = $_SESSION['user']['username']??"";
         $blog->save();
@@ -179,6 +219,11 @@ class Pages extends Controller
      */
     public function dashboard()
     {
+         
+        if (!isset($_SESSION['user'])) {
+            header('Location:login');
+        }
+
         $users = $this->model('User')::find('all');
         $data = [
             'users'=>$users
@@ -195,6 +240,10 @@ class Pages extends Controller
      */
     public function changeStatus()
     {
+         
+        if (!isset($_SESSION['user'])) {
+            header('Location:login');
+        }
     
         $id = $_REQUEST['id']??"";
 
@@ -220,6 +269,11 @@ class Pages extends Controller
      */
     public function deleteUser()
     {
+         
+        if (!isset($_SESSION['user'])) {
+            header('Location:login');
+        }
+
         $id = $_REQUEST['id']??"";
         
         $result = $this->userModel::find(array(
@@ -238,6 +292,10 @@ class Pages extends Controller
      */
     public function profile()
     {
+        if (!isset($_SESSION['user'])) {
+            header('Location:login');
+        }
+
         $this -> view('pages/profile');
     }
 
@@ -278,6 +336,11 @@ class Pages extends Controller
      */
     public function hideblog()
     {
+         
+        if (!isset($_SESSION['user'])) {
+            header('Location:login');
+        }
+
         $blogid = $_REQUEST['id']??"";
 
         $result = $this->blogModel::find(array(
@@ -303,13 +366,17 @@ class Pages extends Controller
      */
     public function editBlog()
     {
+        if (!isset($_SESSION['user'])) {
+            header('Location:login');
+        }
+
         $blogid = $_REQUEST['id']??"";
         $blog = $this->blogModel::find(array($blogid));
         $data=[
             'title' => $blog->blogtitle,
             'content' => $blog->content
         ];
-        
+
         $this->view('pages/addpost', $data);
     }
 
@@ -321,6 +388,11 @@ class Pages extends Controller
      */
     public function deleteblog()
     {
+         
+        if (!isset($_SESSION['user'])) {
+            header('Location:login');
+        }
+
         $id = $_REQUEST['id']??"";
         $result = $this->blogModel::find(array(
                 'blog_id'=>$id,
@@ -337,13 +409,24 @@ class Pages extends Controller
      */
     public function updatePost()
     {
+        if (!isset($_SESSION['user'])) {
+            header('Location:login');
+        }
+
         $id = $_REQUEST['id']??"";
         $blog = $this->blogModel::find(array(
                 'blog_id'=>$id,
         ));
 
-        $blog->blogtitle = $_REQUEST['blogtitle']??"";
-        $blog->content = $_REQUEST['blogcontent']??"";
+        $title = $_REQUEST['blogtitle']??"";
+        $title =filter_var($title, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
+
+        $content = $_REQUEST['blogcontent']??"";
+        $content = filter_var($content, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
+
+
+        $blog->blogtitle = $title;
+        $blog->content = $content;
         $blog->save();
         $data=[
             'msg'=>'Blog successfully updated!'
@@ -378,12 +461,21 @@ class Pages extends Controller
 
     public function editprofile()
     {
+         
+        if (!isset($_SESSION['user'])) {
+            header('Location:login');
+        }
+
         $id = $_REQUEST['id']??"";
 
         $users = $this->model('User')::find(array('user_id'=>$id));
         $data = [
             'user'=>$users
         ];
+
+        if (!isset($_SESSION['user'])) {
+            header('Location:login');
+        }
 
         $this->view('pages/editprofile', $data);
     }
@@ -395,9 +487,21 @@ class Pages extends Controller
      */
     public function updateProfile()
     {
+         
+        if (!isset($_SESSION['user'])) {
+            header('Location:login');
+        }
+
+        $email = $_REQUEST['email']??"";
+        $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+
         $username =$_REQUEST['username']??"";
         $fullname =$_REQUEST['fullname']??"";
-        $email=$_REQUEST['email']??"";
+
+       
+        $username =filter_var($username, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
+        $fullname =filter_var($fullname, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
+
         $id = $_REQUEST['id']??"";
 
         $user = $this->model('User')::find(array('user_id'=>$id));
@@ -407,11 +511,23 @@ class Pages extends Controller
         $user->email = $email;
         $user->save();
 
+        // rewrite session data
+        $result = $this->model('User')::find(array('user_id'=>$id));
+
+        $userdata = [
+            'user_id'=>$result->user_id??"",
+            'username'=>$result->username??"",
+            'fullname'=>$result->fullname??"",
+            'email'=>$result->email??"",
+            'role'=>$result->role??""
+        ];
+
+        $_SESSION['user'] = $userdata;
+
+
         $data =[
             'msg'=>"profile updated successfully!"
         ];
-
-
         $this->view('pages/editprofile', $data);
     }
 

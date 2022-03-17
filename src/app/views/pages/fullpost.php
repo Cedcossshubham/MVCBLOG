@@ -62,7 +62,7 @@
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
                     <div class="post-preview">
-                        <a href="post.html">
+                        <a href="#">
                             <h2 class="post-title"><?php echo $data['title'] ?></h2>
                             <h3 class="post-subtitle"><?php echo $data['content']?></h3>
                         </a>

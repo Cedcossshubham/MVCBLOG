@@ -60,8 +60,6 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4 text-white" href="home">Home</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4 text-white" href="about">About</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4 text-white" href="contact">Contact</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4 text-white" href="login">SignIn</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4 text-white" href="signup">SignUp</a></li>
                     </ul>
@@ -78,11 +76,11 @@
                    <!-- Successful signup message here --> 
                      <span class="text-warning"><?php echo isset($data['msg'])?$data['msg']:"" ?> </span>
                         <div class="form-floating">
-                            <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                            <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com" maxlength="50">
                             <label for="floatingInput">Email address</label>
                         </div>
                         <div class="form-floating">
-                            <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
+                            <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password" maxlength="50">
                             <label for="floatingPassword">Password</label>
                         </div>
 
